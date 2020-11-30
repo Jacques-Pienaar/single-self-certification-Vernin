@@ -1,11 +1,9 @@
-<div [ngClass]="[setmode ? 'YS' : 'ANZ']">
+<html>
   <div *ngIf="data; else loading">
     <p>{{ this.entity }}</p>
     <p>{{ this.data.url }}</p>
-    <h1 class="hiddenView">Hola Welcome to Funeral</h1>
-    <table [ngClass]="{
-      'you-source': setmode === 'you-source',
-      'ANZ': setmode === 'ANZ'}">
+    <h1 [ngClass]="this.entity">Hola Welcome to Funeral</h1>
+    <table [ngClass]="this.entity">
       <th>Big FLask is Dead</th>
       <tbody>
         <tr>
@@ -20,9 +18,8 @@
       </tbody>
     </table>
       <button (click)="toggleStyle()">Swap</button>
-      <button (click)="getEntity()">View Entity</button>
   </div>
-</div>
+</html>
 
 <ng-template #loading>
   <p>...Loading</p>

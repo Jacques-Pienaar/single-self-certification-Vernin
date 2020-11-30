@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
   //@Output () mode = new EventEmitter<boolean>();
   data: any;
   entity: any;
-  setmode = "you-source";
   localUrl: string = '';
   constructor(private styleService: StyleService, private sanitizer: DomSanitizer, private route: ActivatedRoute) {
 
@@ -24,6 +23,7 @@ export class HomeComponent implements OnInit {
     this.route.queryParamMap.subscribe(queryParams => {
       this.entity = queryParams.get("key")
       this.localUrl = `../../../assets/${this.entity}.scss`;
+      console.log(this.entity);
     })
     this.styleService
       .getStyleUri()
@@ -36,23 +36,16 @@ export class HomeComponent implements OnInit {
   }
 
   toggleStyle() {
-    if (this.setmode === "you-source"){
-      this.setmode = "ANZ";
+    if (this.entity === "you-source"){
+      this.entity = "ANZ";
     }
     else
     {
-      this.setmode = "you-source";
+      this.entity  = 'you-source';
     }
-    console.log(this.setmode);
+    console.log(this.entity);
   }
 
 
-  //Method that gets the entity from the API URL
-  getEntity(){
-    var arr = this.data.url.split('/');
-    var entityArr = arr[arr.length-1].split('.');
-    var entity = entityArr[0];
-    console.log(entity);
-    return entity;
-  }
+
 }
