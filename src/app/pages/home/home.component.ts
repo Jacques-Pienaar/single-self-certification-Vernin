@@ -20,6 +20,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.entity == null){
+      this.entity = 'default';
+    }
+
     this.route.queryParamMap.subscribe(queryParams => {
       this.entity = queryParams.get("key")
       this.localUrl = `../../../assets/${this.entity}.scss`;

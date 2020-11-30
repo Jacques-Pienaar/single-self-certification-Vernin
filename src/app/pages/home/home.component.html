@@ -1,8 +1,5 @@
-<html>
-  <div *ngIf="data; else loading">
-    <p>{{ this.entity }}</p>
-    <p>{{ this.data.url }}</p>
-    <h1 [ngClass]="this.entity">Hola Welcome to Funeral</h1>
+  <div class="body-home" [ngClass]="this.entity">
+    <p [ngClass]="this.entity">{{ this.entity }}</p>
     <table [ngClass]="this.entity">
       <th>Big FLask is Dead</th>
       <tbody>
@@ -17,10 +14,8 @@
         </tr>
       </tbody>
     </table>
-      <button (click)="toggleStyle()">Swap</button>
   </div>
-</html>
 
-<ng-template #loading>
+<!-- <ng-template #loading>
   <p>...Loading</p>
-</ng-template>
+</ng-template> -->
