@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { StyleService } from 'src/app/_shared/services/style.service';
@@ -11,18 +11,20 @@ import { StyleService } from 'src/app/_shared/services/style.service';
 
 })
 export class HomeComponent implements OnInit {
+  //@Output () mode = new EventEmitter<boolean>();
   data: any;
   entity: any;
-  localUrl:string = '';
-  constructor(private styleService: StyleService, private sanitizer:DomSanitizer, private route :ActivatedRoute) {
-    
+  setmode = "you-source";
+  localUrl: string = '';
+  constructor(private styleService: StyleService, private sanitizer: DomSanitizer, private route: ActivatedRoute) {
+
   }
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(queryParams => {
       this.entity = queryParams.get("key")
       this.localUrl = `../../../assets/${this.entity}.scss`;
-    })    
+    })
     this.styleService
       .getStyleUri()
       .then((data) => {
@@ -31,5 +33,26 @@ export class HomeComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  toggleStyle() {
+    if (this.setmode === "you-source"){
+      this.setmode = "ANZ";
+    }
+    else
+    {
+      this.setmode = "you-source";
+    }
+    console.log(this.setmode);
+  }
+
+
+  //Method that gets the entity from the API URL
+  getEntity(){
+    var arr = this.data.url.split('/');
+    var entityArr = arr[arr.length-1].split('.');
+    var entity = entityArr[0];
+    console.log(entity);
+    return entity;
   }
 }

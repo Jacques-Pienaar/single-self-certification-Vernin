@@ -1,17 +1,29 @@
-<div *ngIf="data else loading">
-  <link rel="stylesheet" [attr.href]="localUrl">
-  <p>{{this.entity}}</p>
-  <h1 class="hiddenView">Hola Welcome to Funeral</h1>
-
-  <table>
-    <th>Big FLask is Dead</th>
-    <tbody>
-      <tr>Big Flask</tr>
-      <tr>Dead</tr>
-      <tr>he</tr>
-    </tbody>
-  </table>
+<div [ngClass]="[setmode ? 'YS' : 'ANZ']">
+  <div *ngIf="data; else loading">
+    <p>{{ this.entity }}</p>
+    <p>{{ this.data.url }}</p>
+    <h1 class="hiddenView">Hola Welcome to Funeral</h1>
+    <table [ngClass]="{
+      'you-source': setmode === 'you-source',
+      'ANZ': setmode === 'ANZ'}">
+      <th>Big FLask is Dead</th>
+      <tbody>
+        <tr>
+          Big Flask
+        </tr>
+        <tr>
+          Dead
+        </tr>
+        <tr>
+          he
+        </tr>
+      </tbody>
+    </table>
+      <button (click)="toggleStyle()">Swap</button>
+      <button (click)="getEntity()">View Entity</button>
+  </div>
 </div>
+
 <ng-template #loading>
-<p>...Loading</p>
+  <p>...Loading</p>
 </ng-template>
